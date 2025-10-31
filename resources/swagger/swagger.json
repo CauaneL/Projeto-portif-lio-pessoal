@@ -1,0 +1,140 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CRM Automation API",
+    "version": "1.0.0",
+    "description": "API para automação de integração entre CRM, planilhas Excel e ferramenta de mensageria, com autenticação JWT."
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Login do usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Token JWT gerado", "content": { "application/json": { "schema": { "type": "object", "properties": { "token": { "type": "string" } } } } } },
+          "401": { "description": "Credenciais inválidas" },
+          "500": { "description": "Erro interno no servidor" }
+        }
+      }
+    },
+    "/crm/extract": {
+      "get": {
+        "summary": "Extrai lista de clientes do CRM",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de clientes", "content": { "application/json": { "schema": { "type": "object", "properties": { "clientes": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "nome": { "type": "string" }, "status": { "type": "string" } } } } } } } } },
+          "401": { "description": "Não autorizado" },
+          "500": { "description": "Erro interno no servidor" }
+        }
+      }
+    },
+    "/excel/upload": {
+      "post": {
+        "summary": "Processa planilha Excel de clientes",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": { "type": "string", "format": "binary" }
+                },
+                "required": ["file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Arquivo processado", "content": { "application/json": { "schema": { "type": "object", "properties": { "atualizados": { "type": "integer" }, "erros": { "type": "integer" }, "mensagem": { "type": "string" } } } } } },
+          "400": { "description": "Requisição inválida" },
+          "401": { "description": "Não autorizado" },
+          "500": { "description": "Erro interno no servidor" }
+        }
+      }
+    },
+    "/crm/import": {
+      "post": {
+        "summary": "Importa atualizações para o CRM",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "status_novo": { "type": "string" }
+                  },
+                  "required": ["id", "status_novo"]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Atualizações importadas", "content": { "application/json": { "schema": { "type": "object", "properties": { "sucesso": { "type": "boolean" }, "atualizados": { "type": "array", "items": { "type": "object", "properties": { "id": { "type": "string" }, "status_antigo": { "type": "string" }, "status_novo": { "type": "string" } } } } } } } } },
+          "400": { "description": "Requisição inválida" },
+          "401": { "description": "Não autorizado" },
+          "500": { "description": "Erro interno no servidor" }
+        }
+      }
+    },
+    "/mensageria/send": {
+      "post": {
+        "summary": "Envia mensagens padrão aos clientes",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientes": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                },
+                "required": ["clientes"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Mensagens enviadas", "content": { "application/json": { "schema": { "type": "object", "properties": { "enviados": { "type": "integer" }, "falhas": { "type": "integer" }, "mensagem": { "type": "string" } } } } } },
+          "400": { "description": "Requisição inválida" },
+          "401": { "description": "Não autorizado" },
+          "500": { "description": "Erro interno no servidor" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
