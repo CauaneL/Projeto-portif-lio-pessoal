@@ -31,6 +31,31 @@
         }
       }
     },
+    "/auth/register": {
+      "post": {
+        "summary": "Registrar novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuário registrado com sucesso", "content": { "application/json": { "schema": { "type": "object", "properties": { "message": { "type": "string" } } } } } },
+          "400": { "description": "Usuário já existe ou dados inválidos", "content": { "application/json": { "schema": { "type": "object", "properties": { "message": { "type": "string" } } } } } },
+          "500": { "description": "Erro interno no servidor" }
+        }
+      }
+    },
     "/crm/extract": {
       "get": {
         "summary": "Extrai lista de clientes do CRM",
@@ -111,7 +136,15 @@
                 "properties": {
                   "clientes": {
                     "type": "array",
-                    "items": { "type": "string" }
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "nome": { "type": "string" },
+                        "telefone": { "type": "string" },
+                        "cpf": { "type": "string" }
+                      },
+                      "required": ["nome", "telefone", "cpf"]
+                    }
                   }
                 },
                 "required": ["clientes"]
