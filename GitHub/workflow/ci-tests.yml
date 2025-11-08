@@ -1,0 +1,33 @@
+name: CI PPP
+
+# Gatilhos
+on:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    # [config do SO] (windows/linux/mac, chrome/firefox/edge, ...)
+    runs-on: ubuntu-latest
+
+    # [variáveis de ambiente]
+    env: 
+      API_BASE_URL: 'http://localhost:3000/api-docs'
+      PORT: 3000
+
+    # [ações ou passos]
+    steps:
+      - name: Checkout do Repositório 
+        uses: actions/checkout@v4
+
+    # [deps do projeto] (node/npm, java/maven,gradle, python/pip, ...)
+      - name: Instalando as dependências
+        run: npm install
+
+      - name: Iniciar o servidor de mocks 
+        run: npm run mock-server &
+
+      - name: Iniciar o servidor de aplicação
+        run: npm run server &
+
+      - name: Executar os testes
+        run: npx cypress run

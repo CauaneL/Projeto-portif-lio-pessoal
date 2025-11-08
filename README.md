@@ -1,47 +1,49 @@
-# CRM Automation API
+name: CI Projeto Pessoal K6
 
-API para automação de integração entre CRM, planilhas Excel e ferramenta de mensageria, com autenticação JWT e documentação via Swagger.
+# Gatilhos
+on:
+  workflow_dispatch:
 
-## Como Executar
+jobs:
+  tests:
+    runs-on: ubuntu-latest
 
-```bash
-npm install
-npm run dev
-```
+    # [variáveis de ambiente]
+    env:
+      API_BASE_URL: 'http://localhost:3000'
+      PORT: 3000
 
-Acesse a documentação Swagger em:
-http://localhost:3000/api-docs
+    # [ações ou passos]
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
 
-## Autenticação
+      # Instala e configura Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use uma versão LTS estável
 
-- Login: `POST /auth/login`
-- Header: `Authorization: Bearer <token>`
+      # Instala o k6 no sistema Ubuntu
+      - name: Instalar k6
+        run: sudo apt-get update && sudo apt-get install k6
 
-## Principais Endpoints
+      # [deps do projeto]
+      - name: Instalando as dependências do projeto
+        run: npm install
 
-- `GET /crm/extract` — Extrai lista de clientes do CRM
-- `POST /excel/upload` — Processa planilha Excel de clientes
-- `POST /crm/import` — Importa atualizações para o CRM
-- `POST /mensageria/send` — Envia mensagens padrão aos clientes
+      - name: Iniciar o servidor de mocks
+        # O "&" garante que o servidor rode em segundo plano e não bloqueie o workflow
+        run: npm run mock-server &
 
-## Estrutura de Pastas
+      - name: Iniciar o servidor de aplicação
+        run: npm run server &
+     
 
-```
-crm-automation-api/
-│
-├── src/
-│   ├── routes/
-│   ├── controllers/
-│   ├── services/
-│   ├── models/
-│   ├── middleware/
-│   ├── app.js
-│   └── server.js
-│
-├── resources/
-│   └── swagger/
-│       └── swagger.json
-│
-├── package.json
-└── README.md
-```
+      
+      - name: Aguardar o início do servidor (Opcional, mas Recomendado)
+        run: sleep 5s 
+
+      - name: Executar os Testes de Carga com k6
+        # Executa o script k6 com o caminho especificado
+        run: k6 run "src/test/testk6/ImportaratualizacaoCrm.test.js"
