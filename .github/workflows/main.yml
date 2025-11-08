@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Use uma versão LTS estável
+          node-version: '22' 
 
       # Instala o k6 no sistema Ubuntu
       - name: Instalar k6
