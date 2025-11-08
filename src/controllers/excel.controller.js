@@ -11,6 +11,6 @@ exports.upload = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ erro: 'Falha ao processar Excel' });
+  res.status(400).json({ erro: 'Falha ao processar Excel' });
   }
 };

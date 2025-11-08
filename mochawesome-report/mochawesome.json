@@ -1,0 +1,523 @@
+{
+  "stats": {
+    "suites": 12,
+    "tests": 12,
+    "passes": 12,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-06T02:37:53.520Z",
+    "end": "2025-11-06T02:37:53.688Z",
+    "duration": 168,
+    "testsRegistered": 12,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "64fb5d0b-5781-486d-b76a-526780aff450",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d9208034-6c02-4304-a778-91c2e90012cd",
+          "title": "post",
+          "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\EnviarmensagemPadrao.test.js",
+          "file": "\\src\\test\\EnviarmensagemPadrao.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "26a8c8e1-b5e7-4ab1-a8c0-0309a9c604d7",
+              "title": "post/mensageria/send",
+              "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\EnviarmensagemPadrao.test.js",
+              "file": "\\src\\test\\EnviarmensagemPadrao.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve retornar 200 quando a mensagem for enviada com sucesso",
+                  "fullTitle": "post post/mensageria/send deve retornar 200 quando a mensagem for enviada com sucesso",
+                  "timedOut": false,
+                  "duration": 73,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/')\n.post('/mensagem/enviar')\n.send({\n  clientes: [\n    { nome: \"cauane lima\", telefone: \"+5511960743217\", cpf: \"74547924848\" }\n  ]\n});\nexpect([200]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "5c1b520d-d1c3-412f-a486-69edcf3ce4f9",
+                  "parentUUID": "26a8c8e1-b5e7-4ab1-a8c0-0309a9c604d7",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve retornar 400 quando os dados forem inválidos",
+                  "fullTitle": "post post/mensageria/send deve retornar 400 quando os dados forem inválidos",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/')     \n.post('/mensagem/enviar')\n.send({                     \n    \"nome\": \"Lucinha\",\n    \"telefone\":\"11960743217\",\n    \"cpf\": \"4754702484\"\n});\nexpect([200, 400]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "7b729132-c76f-4f6a-8afc-9be5bd546070",
+                  "parentUUID": "26a8c8e1-b5e7-4ab1-a8c0-0309a9c604d7",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "5c1b520d-d1c3-412f-a486-69edcf3ce4f9",
+                "7b729132-c76f-4f6a-8afc-9be5bd546070"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 77,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "813c00a9-90be-4016-a29f-fc2f56e30c62",
+          "title": "get",
+          "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\ExtrairListadeclientes.test.js",
+          "file": "\\src\\test\\ExtrairListadeclientes.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "5a191fd9-c4f6-4be8-a176-9deff6e5f561",
+              "title": "get/extract",
+              "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\ExtrairListadeclientes.test.js",
+              "file": "\\src\\test\\ExtrairListadeclientes.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve retornar 200 e a lista de clientes",
+                  "fullTitle": "get get/extract deve retornar 200 e a lista de clientes",
+                  "timedOut": false,
+                  "duration": 6,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n  .get('/extract')\n  .set('Authorization', validToken);\nconsole.log(resposta.body);\nexpect(resposta.status).to.equal(200);\nexpect(resposta.text).to.include('Swagger');",
+                  "err": {},
+                  "uuid": "56562ef2-719b-4bff-a75c-8709b21ec169",
+                  "parentUUID": "5a191fd9-c4f6-4be8-a176-9deff6e5f561",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve retornar 401 quando não fornecer token válido",
+                  "fullTitle": "get get/extract deve retornar 401 quando não fornecer token válido",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n  .get('/extract')\n  .set('Authorization', 'Bearer hiklbgyuftydrrkduzeachbhjlbhj');\nexpect([200, 401]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "6cd39e66-0ba4-431c-b5b5-a8d6d836f600",
+                  "parentUUID": "5a191fd9-c4f6-4be8-a176-9deff6e5f561",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "56562ef2-719b-4bff-a75c-8709b21ec169",
+                "6cd39e66-0ba4-431c-b5b5-a8d6d836f600"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 10,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "368d884d-0f1c-4d6e-922a-bd363f71e10d",
+          "title": "post",
+          "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\ImportaratualizacaoCRM.test.js",
+          "file": "\\src\\test\\ImportaratualizacaoCRM.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "1a2a29ea-e2ac-499f-ba55-42ad0bb186d1",
+              "title": "post/crm/import",
+              "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\ImportaratualizacaoCRM.test.js",
+              "file": "\\src\\test\\ImportaratualizacaoCRM.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve retornar 201 quando a atualização for realizada com sucesso",
+                  "fullTitle": "post post/crm/import deve retornar 201 quando a atualização for realizada com sucesso",
+                  "timedOut": false,
+                  "duration": 5,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.post('/crm/import')\n.send({\n    \"clienteId\": \"123\",\n    \"novoStatus\": \"Em enriquecimento\"\n});\nexpect([200, 201]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "ce94dc94-3aa9-49e6-b044-75d82124e233",
+                  "parentUUID": "1a2a29ea-e2ac-499f-ba55-42ad0bb186d1",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve retornar 401 quando o cliente não for encontrado",
+                  "fullTitle": "post post/crm/import deve retornar 401 quando o cliente não for encontrado",
+                  "timedOut": false,
+                  "duration": 5,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.put('/crm/update')\n.send({\n    \"clienteId\": \"99999\",\n    \"novoStatus\": \"Em enriquecimento\"\n});\nexpect([200, 401]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "6f78aff4-c12b-406a-9f1d-560b6495562f",
+                  "parentUUID": "1a2a29ea-e2ac-499f-ba55-42ad0bb186d1",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "ce94dc94-3aa9-49e6-b044-75d82124e233",
+                "6f78aff4-c12b-406a-9f1d-560b6495562f"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 10,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "8f71b376-ac6d-4e8f-b2aa-f3005ae8dbb8",
+          "title": "post",
+          "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\LogindeUsuario.test.js",
+          "file": "\\src\\test\\LogindeUsuario.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "a0fc7702-179d-449d-a7a2-3188415e5494",
+              "title": "post/login",
+              "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\LogindeUsuario.test.js",
+              "file": "\\src\\test\\LogindeUsuario.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve retornar 200 quando fornecer credenciais validar",
+                  "fullTitle": "post post/login deve retornar 200 quando fornecer credenciais validar",
+                  "timedOut": false,
+                  "duration": 6,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.post('/login')\n.send({\n    \"username\":\"cauane.lima\",\n    \"password\":\"123456\",\n    \"role\": \"adimin\"\n});\nexpect(resposta.status).to.equal(200);\nexpect(resposta.text).to.equal(resposta.text);",
+                  "err": {},
+                  "uuid": "82eb602c-6605-4fa2-9544-4c320f5bd385",
+                  "parentUUID": "a0fc7702-179d-449d-a7a2-3188415e5494",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve retornar 401 quando não fornecer credenciais validas",
+                  "fullTitle": "post post/login deve retornar 401 quando não fornecer credenciais validas",
+                  "timedOut": false,
+                  "duration": 5,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.post('/login')\n.send({\n    \"username\": \"cauane.lima\",\n    \"password\": \"789456\"\n});\nexpect([200, 401]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "567a6cd5-723a-44c3-9f17-55fd4fe1d945",
+                  "parentUUID": "a0fc7702-179d-449d-a7a2-3188415e5494",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "82eb602c-6605-4fa2-9544-4c320f5bd385",
+                "567a6cd5-723a-44c3-9f17-55fd4fe1d945"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 11,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "e23e839e-60a1-4bc4-a1eb-794b3d3a5554",
+          "title": "post",
+          "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\ProcessarPlanilhaexcel.test.js",
+          "file": "\\src\\test\\ProcessarPlanilhaexcel.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "07a05760-b762-46e8-a6d9-5b0e3899f1b5",
+              "title": "post/excel/upload",
+              "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\ProcessarPlanilhaexcel.test.js",
+              "file": "\\src\\test\\ProcessarPlanilhaexcel.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve retornar 200 quando o arquivo for processado com sucesso",
+                  "fullTitle": "post post/excel/upload deve retornar 200 quando o arquivo for processado com sucesso",
+                  "timedOut": false,
+                  "duration": 12,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.post('/excel/upload')\n.attach('file', 'C:/Projetos/Projeto-portif-lio-pessoal/src/test/PlanilhaClientes.xlsx')\n\nexpect(resposta.status).to.equal(200);",
+                  "err": {},
+                  "uuid": "12c179e4-0af7-4a1f-91da-06bc48a22d0f",
+                  "parentUUID": "07a05760-b762-46e8-a6d9-5b0e3899f1b5",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve retornar 400 quando o arquivo for inválido",
+                  "fullTitle": "post post/excel/upload deve retornar 400 quando o arquivo for inválido",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.post('/excel/upload')\n.attach('file', 'C:/Projetos/Projeto-portif-lio-pessoal/src/test/ArquivoInvalido.txt')\n           expect([200, 400]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "41c9d53b-8dd7-45c2-b1a6-2123c690c9af",
+                  "parentUUID": "07a05760-b762-46e8-a6d9-5b0e3899f1b5",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "12c179e4-0af7-4a1f-91da-06bc48a22d0f",
+                "41c9d53b-8dd7-45c2-b1a6-2123c690c9af"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 16,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "b0223932-1f7b-4113-84ad-516c0a77c3b2",
+          "title": "post",
+          "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\registrarnovousuario.test.js",
+          "file": "\\src\\test\\registrarnovousuario.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "346ab1db-fd40-4edd-a823-4ab12ccffab6",
+              "title": "post/register",
+              "fullFile": "C:\\Projetos\\Projeto-portif-lio-pessoal\\src\\test\\registrarnovousuario.test.js",
+              "file": "\\src\\test\\registrarnovousuario.test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "deve retornar 201 quando usuario for cadastrado com sucesso",
+                  "fullTitle": "post post/register deve retornar 201 quando usuario for cadastrado com sucesso",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.post('/resgister')\n.send({\n    \"username\": \"henry.silva\",\n    \"password\": \"12345678\"\n});\n\n\nexpect([200, 201]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "ba3de741-d87f-49f8-8d41-63cfb9eefabc",
+                  "parentUUID": "346ab1db-fd40-4edd-a823-4ab12ccffab6",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "deve retornar 400 quando usuario ja existir",
+                  "fullTitle": "post post/register deve retornar 400 quando usuario ja existir",
+                  "timedOut": false,
+                  "duration": 3,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request('http://localhost:3000/api-docs/#/')\n.post('/resgister')\n.send({\n    \"username\": \"henry.silva\",\n    \"password\": \"12345678\"\n});\n\nexpect([200, 400]).to.include(resposta.status);",
+                  "err": {},
+                  "uuid": "a942908f-48b9-4ab2-8430-56507e1e93ff",
+                  "parentUUID": "346ab1db-fd40-4edd-a823-4ab12ccffab6",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "ba3de741-d87f-49f8-8d41-63cfb9eefabc",
+                "a942908f-48b9-4ab2-8430-56507e1e93ff"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 7,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.4"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}

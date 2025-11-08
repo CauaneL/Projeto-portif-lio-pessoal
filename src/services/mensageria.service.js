@@ -1,8 +1,14 @@
 exports.sendMessages = async (body) => {
-  // Simulação de envio
-  const { clientes } = body;
+  // Pode ser um cliente único ou uma lista
+  const clientes = Array.isArray(body.clientes) ? body.clientes : [body];
+
   let enviados = 0, falhas = 0;
-  if (!clientes || !Array.isArray(clientes)) return { enviados, falhas: 1, mensagem: 'Dados inválidos.' };
-  clientes.forEach(() => enviados++);
-  return { enviados, falhas, mensagem: 'Mensagens enviadas com sucesso.' };
+
+  // validações simples
+  clientes.forEach((c) => {
+    if (c.nome && c.telefone && c.cpf) enviados++;
+    else falhas++;
+  });
+
+  return { enviados, falhas, mensagem: 'Mensagem enviada com sucesso' };
 };

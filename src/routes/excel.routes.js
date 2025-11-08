@@ -5,6 +5,6 @@ const authMiddleware = require('../middleware/auth.middleware');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
-router.post('/upload', authMiddleware, upload.single('file'), excelController.upload);
+router.post('/upload', authMiddleware('admin'), upload.single('file'), excelController.upload);
 
 module.exports = router;
