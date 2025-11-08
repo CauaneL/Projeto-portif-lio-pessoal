@@ -1,0 +1,49 @@
+name: CI Projeto Pessoal K6
+
+# Gatilhos
+on:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    # [variáveis de ambiente]
+    env:
+      API_BASE_URL: 'http://localhost:3000'
+      PORT: 3000
+
+    # [ações ou passos]
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      # Instala e configura Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use uma versão LTS estável
+
+      # Instala o k6 no sistema Ubuntu
+      - name: Instalar k6
+        run: sudo apt-get update && sudo apt-get install k6
+
+      # [deps do projeto]
+      - name: Instalando as dependências do projeto
+        run: npm install
+
+      - name: Iniciar o servidor de mocks
+        # O "&" garante que o servidor rode em segundo plano e não bloqueie o workflow
+        run: npm run mock-server &
+
+      - name: Iniciar o servidor de aplicação
+        run: npm run server &
+     
+
+      
+      - name: Aguardar o início do servidor (Opcional, mas Recomendado)
+        run: sleep 5s 
+
+      - name: Executar os Testes de Carga com k6
+        # Executa o script k6 com o caminho especificado
+        run: k6 run "src/test/testk6/ImportaratualizacaoCrm.test.js"
